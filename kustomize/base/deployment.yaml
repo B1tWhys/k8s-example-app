@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-example-app
+  labels:
+    app: k8s-example-app
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: k8s-example-app
+      labels:
+        app: k8s-example-app
+    spec:
+      containers:
+        - name: k8s-example-app
+          image: k8s-example-app:0.0.1-SNAPSHOT
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: k8s-example-app
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: k8s-example-app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-example-app
+spec:
+  selector:
+    app: k8s-example-app
+  ports:
+    - port: 8000
+      targetPort: 8080
+  type: NodePort
