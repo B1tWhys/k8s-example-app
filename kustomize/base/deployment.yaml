@@ -19,25 +19,15 @@ spec:
           ports:
             - containerPort: 8080
               name: app
-          livenessProbe:
-            initialDelaySeconds: 60
-            periodSeconds: 3
+          readinessProbe:
             httpGet:
               port: 8080
-              path: /actuator/health
+              path: /actuator/health/readiness
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /actuator/health/liveness
       restartPolicy: Always
   selector:
     matchLabels:
       app: k8s-example-app
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: k8s-example-app
-spec:
-  selector:
-    app: k8s-example-app
-  ports:
-    - port: 8000
-      targetPort: 8080
-  type: NodePort

@@ -3,5 +3,4 @@ kind: Kustomization
 resources:
   - deployment.yaml
   - configmap.yaml
-  - ing.yaml
-#  - example-ing.yaml
+  - service.yaml
