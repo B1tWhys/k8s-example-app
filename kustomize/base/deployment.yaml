@@ -12,6 +12,7 @@ spec:
       labels:
         app: k8s-example-app
     spec:
+      serviceAccountName: k8s-example-sa
       containers:
         - name: k8s-example-app
           image: k8s-example-app:0.1.0-SNAPSHOT
@@ -31,3 +32,9 @@ spec:
   selector:
     matchLabels:
       app: k8s-example-app
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: k8s-example-sa

@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: k8s-example-cm
 data:
-  some-property: some-value
+  test.response-mesg: bar
