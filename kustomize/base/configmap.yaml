@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: k8s-example-cm
-data:
-  test.response-mesg: bar
